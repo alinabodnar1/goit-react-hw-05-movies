@@ -1,15 +1,15 @@
-import React, {useState, useEffect,  Suspense } from 'react';
+import React, {useState, useEffect,  Suspense, useRef } from 'react';
 import { Link, useParams, useLocation, Outlet } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { getMovieDetails } from '../../fetchMovies';
-import { genresGalleryEditor, genresDetail, genresItems  } from 'getGenres';
+import { genresGalleryEditor, genresDetail  } from 'getGenres';
 import { Button, Container,Image, Title, Paragraph, StyledLink } from './MovieDetail.styled';
 
 export default function MovieDetail() {
  const [movie, setMovie] = useState('');
   const { movieId } = useParams();
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? "/products";
+  const backLinkHref = useRef(location.state?.from ?? "/");
   
   const genres = genresDetail(movie.genres);
   const genres1 = genresGalleryEditor(movie.genres);
@@ -30,7 +30,8 @@ export default function MovieDetail() {
 
   return (
     <>
-      <Link to={location.state?.from  ?? '/'}>
+      {/* <Link to={location.state?.from  ?? '/'}> */}
+      <Link to={backLinkHref.current}>
         <Button variant="text">Back</Button>
       </Link>
       <div>

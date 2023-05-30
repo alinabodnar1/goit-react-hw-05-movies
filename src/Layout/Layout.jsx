@@ -12,7 +12,7 @@ import { Container, Header, StyledLink, List } from './Layout.styled';
                 </List>
             </Header>
             <main>
-                <Suspense fallback={<div>Loading page...</div>}>
+                <Suspense fallback={<div>Loading...</div>}>
                     <Outlet />
                 </Suspense>
             </main>    

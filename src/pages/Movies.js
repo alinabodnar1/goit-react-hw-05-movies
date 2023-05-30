@@ -3,6 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useLocation, Link } from 'react-router-dom';
 import Searchbar from "../components/Searchbar";
 import { getMovieSearch } from '../fetchMovies';
+import { StyledLink } from '../pages/Home/Home.styled';
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);
@@ -38,12 +39,12 @@ export default function Movies() {
       <Searchbar handleSearch={handleSearch}/>
         <ul>
         {movies.map(movie => (
-          <Link key={movie.id}
+          <StyledLink key={movie.id}
             to={`${movie.id}`}
             state={{from: location}}
             style={{ display: "block" }}>
             {movie.original_title}
-          </Link>
+          </StyledLink>
         ))}
      </ul>
       <ToastContainer
