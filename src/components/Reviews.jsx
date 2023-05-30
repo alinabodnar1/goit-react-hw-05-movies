@@ -21,7 +21,7 @@ export default function Reviews() {
      .catch(() => {
         alert("An error occurred while responding movies from the backend.")
       });
-   }, []);
+   }, [movieId]);
   
   return (
     <div>

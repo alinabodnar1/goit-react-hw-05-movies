@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Searchbar from "../components/Searchbar";
 import { getMovieSearch } from '../fetchMovies';
 import { StyledLink } from '../pages/Home/Home.styled';

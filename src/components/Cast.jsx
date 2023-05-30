@@ -21,7 +21,7 @@ export default function Cast() {
     .catch(() => {
         alert("An error occurred while responding Cast from the backend.")
       });
-  }, []);
+  }, [movieId]);
 
   return (
     <div>

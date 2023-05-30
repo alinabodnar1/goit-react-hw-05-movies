@@ -26,7 +26,7 @@ export default function MovieDetail() {
     .catch(() => {
         toast.error("An error occurred while responding movie details from the backend.")
       });
-  }, []);
+  }, [movieId]);
 
   return (
     <>

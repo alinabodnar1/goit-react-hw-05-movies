@@ -25,7 +25,7 @@ function genresDetail(array) {
 }
 
 function genresGalleryEditor(array) {
-    const genreResult = genresItems.reduce((acc, genre) => {
+    genresItems.reduce((acc, genre) => {
         if (Array.isArray(array) && array.includes(genre.id)) {
             acc.push(genre.name);
         }
