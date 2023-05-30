@@ -2,16 +2,14 @@ import React, {useState, useEffect} from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useLocation, Link } from 'react-router-dom';
 import Searchbar from "../components/Searchbar";
-import  getMovieSearch  from '../ApiRequests/getMovieSearch';
+import { getMovieSearch } from '../fetchMovies';
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
-
   const location = useLocation();
-  console.log("location:", location);
 
-    const handleSearch = (query) => {
+  const handleSearch = (query) => {
     setQuery(query.trim());
     setMovies([]);
   }

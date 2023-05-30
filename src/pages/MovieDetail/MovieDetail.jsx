@@ -1,9 +1,9 @@
 import React, {useState, useEffect,  Suspense } from 'react';
 import { Link, useParams, useLocation, Outlet } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import getMovieDetails from '../ApiRequests/getMovieById';
-import genresItems, { genresGalleryEditor } from 'getGenres';
-import Button from '@mui/material/Button';
+import { getMovieDetails } from '../../fetchMovies';
+import { genresGalleryEditor, genresDetail, genresItems  } from 'getGenres';
+import { Button, Container,Image, Title, Paragraph, StyledLink } from './MovieDetail.styled';
 
 export default function MovieDetail() {
  const [movie, setMovie] = useState('');
@@ -11,7 +11,10 @@ export default function MovieDetail() {
   const location = useLocation();
   const backLinkHref = location.state?.from ?? "/products";
   
-  const genres = genresItems(movie.genres);
+  const genres = genresDetail(movie.genres);
+  const genres1 = genresGalleryEditor(movie.genres);
+  console.log("genresDetail:", genres);
+  console.log("genresGalleryEditor:", genres1);
   
   const imgURL = 'https://image.tmdb.org/t/p/w200';
   useEffect(() => {
@@ -27,24 +30,25 @@ export default function MovieDetail() {
 
   return (
     <>
-      <Link to={location.state.from}>
+      <Link to={location.state?.from  ?? '/'}>
         <Button variant="text">Back</Button>
       </Link>
       <div>
-        <div style={{display: "flex"}}>
-          <img src={`${imgURL}${movie.poster_path}`}
+        <Container>
+          <Image src={`${imgURL}${movie.poster_path}`}
             alt={movie.title} />
           <div >
-            <h2>{movie.title}</h2>
-            <p>Popularity: {movie.popularity}</p>
-            <p><b>Overview:</b> {movie.overview}</p>
+            <Title>{movie.title}</Title>
+            <p><b>Popularity:</b> {movie.popularity}</p>
+            <p><b>Overview:</b>
+              <Paragraph>{movie.overview}</Paragraph>
+            </p>
             <p><b>Genres:</b> {genresGalleryEditor(movie.genres)}</p>
           </div>
-        </div>
-        <h3>Additional Information</h3>
+        </Container>
         <ul>
-          <li><Link to="cast">Cast</Link></li>
-          <li><Link to="reviews">Reviews</Link></li>
+          <li><StyledLink to="cast">Cast</StyledLink></li>
+          <li><StyledLink to="reviews">Reviews</StyledLink></li>
         </ul>
         <Suspense fallback={<div>Loading additional information...</div>}>
           <Outlet />

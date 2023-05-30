@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import SearchIcon from '@mui/icons-material/Search';
+import { Form } from './Components.styled';
 
 
 export default function Searchbar({handleSearch}) {
@@ -19,9 +20,6 @@ export default function Searchbar({handleSearch}) {
         setSearchParams({ search: queryString });
     }
 
-    // const a = searchParams.get('search');
-    // console.log("searchParams:", a);
-
     const handleSubmit = (evt) => {
         evt.preventDefault();
         handleSearch(search); 
@@ -29,19 +27,18 @@ export default function Searchbar({handleSearch}) {
     }
 
     return (
-        <form onSubmit={handleSubmit} 
-              style={{ marginLeft: "15px", marginTop: "15px" }}>
+        <Form onSubmit={handleSubmit} >
             <Stack spacing={2} direction="row">
                 <TextField 
                     onChange={handleChange}
 					value={search}/> 
-                <Button style={{backgroundColor: "orange"}}
+                <Button style={{backgroundColor: "#FF7F50"}}
                     type="submit"
                     variant="contained">
                     <SearchIcon style={{color: "black"}} />
                 </Button>
             </Stack>
-        </form>
+        </Form>
     )
   }
 

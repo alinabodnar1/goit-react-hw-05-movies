@@ -1,4 +1,4 @@
-export const genresItems = [
+const genresItems = [
   { id: 28, name: 'Action' },
   { id: 12, name: 'Adventure' },
   { id: 16, name: 'Animation' },
@@ -20,16 +20,16 @@ export const genresItems = [
   { id: 37, name: 'Western' },
 ];
 
-export default function genresDetail(array) {
+function genresDetail(array) {
   return genresItems.map(genre => genre.name).join(', ');
 }
 
 function genresGalleryEditor(array) {
-    const genreResult = genresItems.reduce((acc, movieGenres) => {
-        if (Array.isArray(array) && array.includes(movieGenres.id)) {
-            acc.push(movieGenres.name);
+    const genreResult = genresItems.reduce((acc, genre) => {
+        if (Array.isArray(array) && array.includes(genre.id)) {
+            acc.push(genre.name);
         }
         return acc;
     }, [])
 }
-export { genresGalleryEditor };
+export { genresGalleryEditor, genresDetail, genresItems};

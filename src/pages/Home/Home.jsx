@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import getTrendMovies from '../ApiRequests/getTrendMovies';
+import { getTrendMovies } from '../../fetchMovies';
 import { ToastContainer, toast } from 'react-toastify';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Title, StyledLink } from './Home.styled';
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
   const location = useLocation();
-  
+
   useEffect(() => {
     getTrendMovies().then(data => {
       if (data.results) {
@@ -20,15 +21,15 @@ export default function Home() {
  
   return (
     <div>
-      <h1>Trending today</h1>
+      <Title>Trending today</Title>
       <ul>
         {movies.map(movie => (
-          <Link key={movie.id}
+          <StyledLink key={movie.id}
             to={`${movie.id}`}
-            state={{from: location}}
-            style={{ display: "block" }}>
+            state={{from: location}} >
+            
             {movie.original_title}
-          </Link>
+          </StyledLink>
         ))}
      </ul>
       <ToastContainer

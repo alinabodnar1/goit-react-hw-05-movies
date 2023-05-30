@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import getMovieReviews from '../ApiRequests/getMovieReviews';
+import { getMovieReviews } from '../fetchMovies';
+import { Paragraph, ListLine } from './Components.styled';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Reviews() {
@@ -24,14 +25,14 @@ export default function Reviews() {
   
   return (
     <div>
-      <ul style={{borderTop: "1px solid gray"}}> 
+      <ListLine> 
         {reviews?.length > 0 && reviews.map(review => (
           <li key={review.id} state={{ from: location }} >
                 <p><b> Author: {review.author}</b></p>
-                <p>{review.content}</p>
+                <Paragraph>{review.content}</Paragraph>
           </li> 
         ))} 
-      </ul>
+      </ListLine>
       {noReviews && <p>We don't have any reviews for this movie.</p>}
     </div>
   )
