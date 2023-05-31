@@ -2,8 +2,20 @@ import React, {useState, useEffect,  Suspense, useRef } from 'react';
 import { Link, useParams, useLocation, Outlet } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { getMovieDetails } from '../../fetchMovies';
-import { genresGalleryEditor, genresDetail  } from 'getGenres';
+import { genresGalleryEditor, genresDetail, genresItems  } from 'getGenres';
 import { Button, Container,Image, Title, Paragraph, StyledLink } from './MovieDetail.styled';
+
+
+function getGenres(array) {
+  genresItems.reduce((acc, genre) => {
+    console.log("genre:", genre);
+    
+        if (Array.isArray(array) && array.includes(genre.id)) {
+            acc.push(genre.name);
+        }
+        return acc;
+    }, [])
+}
 
 export default function MovieDetail() {
  const [movie, setMovie] = useState('');
@@ -12,9 +24,9 @@ export default function MovieDetail() {
   const backLinkHref = useRef(location.state?.from ?? "/");
   
   const genres = genresDetail(movie.genres);
-  const genres1 = genresGalleryEditor(movie.genres);
+  const genres1 = getGenres(movie.genres);
   console.log("genresDetail:", genres);
-  console.log("genresGalleryEditor:", genres1);
+  console.log("genresItems:", genres1);
   
   const imgURL = 'https://image.tmdb.org/t/p/w200';
   useEffect(() => {
@@ -43,7 +55,7 @@ export default function MovieDetail() {
             <p><b>Overview:</b>
               <Paragraph>{movie.overview}</Paragraph>
             </p>
-            <p><b>Genres:</b> {genresGalleryEditor(movie.genres)}</p>
+            <p><b>Genres:</b> {genres1}</p>
           </div>
         </Container>
         <ul>

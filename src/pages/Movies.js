@@ -1,21 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import Searchbar from "../components/Searchbar";
 import { getMovieSearch } from '../fetchMovies';
 import { StyledLink } from '../pages/Home/Home.styled';
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);
-  const [query, setQuery] = useState('');
   const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSearch = (query) => {
-    setQuery(query.trim());
+    setSearchParams({ query: query.trim() });
     setMovies([]);
   }
 
   useEffect(() => {
+    const query = searchParams.get('query') ?? "";
       if (!query) {
           return;
       }
@@ -31,7 +32,7 @@ export default function Movies() {
       .catch(() => {
         toast.error("An error occurred while responding movies from the backend.")
       });
-  }, [query]);
+  }, [searchParams]);
  
 
   return (

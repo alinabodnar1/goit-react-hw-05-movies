@@ -9,9 +9,7 @@ import { Form } from './Components.styled';
 
 export default function Searchbar({handleSearch}) {
     const [searchParams, setSearchParams] = useSearchParams();
-
     const search = searchParams.get("search") ?? "";
-    console.log("query Searchbar:", search); 
 
     const handleChange = (evt) => {
         const queryString = evt.target.value.toLowerCase().trim();
