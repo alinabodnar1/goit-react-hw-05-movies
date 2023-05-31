@@ -35,7 +35,7 @@ export default function MovieDetail() {
       </Link>
       <div>
         <Container>
-          <Image src={`${imgURL}${movie.poster_path}`}
+          <Image src={movie.poster_path && `${imgURL}${movie.poster_path}`}
             alt={movie.title} />
           <div >
             <Title>{movie.title}</Title>
