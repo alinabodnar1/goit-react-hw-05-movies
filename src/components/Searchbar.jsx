@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -8,15 +8,14 @@ import { Form } from './Components.styled';
 
 
 export default function Searchbar({handleSearch}) {
-    const [search, setSearch] = useState('');
     const [searchParams, setSearchParams] = useSearchParams();
-    
-    const query = searchParams.get("search") ?? "";
-    console.log("query:", query); 
+
+    const search = searchParams.get("search") ?? "";
+    console.log("query Searchbar:", search); 
 
     const handleChange = (evt) => {
         const queryString = evt.target.value.toLowerCase().trim();
-        setSearch(queryString);
+        setSearchParams(queryString);
         if (queryString === '') {
             return setSearchParams({});
         }
@@ -26,7 +25,6 @@ export default function Searchbar({handleSearch}) {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         handleSearch(search); 
-        setSearch('');
     }
 
     return (
