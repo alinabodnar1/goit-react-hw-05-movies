@@ -30,7 +30,6 @@ export default function MovieDetail() {
 
   return (
     <>
-      {/* <Link to={location.state?.from  ?? '/'}> */}
       <Link to={backLinkHref.current}>
         <Button variant="text">Back</Button>
       </Link>

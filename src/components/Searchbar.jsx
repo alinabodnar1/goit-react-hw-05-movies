@@ -11,6 +11,9 @@ export default function Searchbar({handleSearch}) {
     const [search, setSearch] = useState('');
     const [searchParams, setSearchParams] = useSearchParams();
     
+    const query = searchParams.get("search") ?? "";
+    console.log("query:", query); 
+
     const handleChange = (evt) => {
         const queryString = evt.target.value.toLowerCase().trim();
         setSearch(queryString);
