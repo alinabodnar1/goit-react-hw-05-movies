@@ -6,7 +6,6 @@ import Stack from '@mui/material/Stack';
 import SearchIcon from '@mui/icons-material/Search';
 import { Form } from './Components.styled';
 
-
 export default function Searchbar({handleSearch}) {
     const [searchParams, setSearchParams] = useSearchParams();
     const search = searchParams.get("search") ?? "";

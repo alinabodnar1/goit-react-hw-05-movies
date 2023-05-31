@@ -2,44 +2,36 @@ import React, {useState, useEffect,  Suspense, useRef } from 'react';
 import { Link, useParams, useLocation, Outlet } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { getMovieDetails } from '../../fetchMovies';
-import { genresGalleryEditor, genresDetail, genresItems  } from 'getGenres';
 import { Button, Container,Image, Title, Paragraph, StyledLink } from './MovieDetail.styled';
 
-
-function getGenres(array) {
-  genresItems.reduce((acc, genre) => {
-    console.log("genre:", genre);
-    
-        if (Array.isArray(array) && array.includes(genre.id)) {
-            acc.push(genre.name);
-        }
-        return acc;
-    }, [])
+const getGenres = genresArray =>  {
+  return genresArray.map(genre => genre.name).join(', ');
 }
 
 export default function MovieDetail() {
- const [movie, setMovie] = useState('');
+  const [movie, setMovie] = useState(''); 
   const { movieId } = useParams();
   const location = useLocation();
   const backLinkHref = useRef(location.state?.from ?? "/");
-  
-  const genres = genresDetail(movie.genres);
-  const genres1 = getGenres(movie.genres);
-  console.log("genresDetail:", genres);
-  console.log("genresItems:", genres1);
-  
   const imgURL = 'https://image.tmdb.org/t/p/w200';
+
   useEffect(() => {
     getMovieDetails(movieId).then(data => {
       if (data) {
         setMovie(data);
       }
     })
-    .catch(() => {
+      .catch(() => {
         toast.error("An error occurred while responding movie details from the backend.")
       });
   }, [movieId]);
 
+  if (!movie) {
+     return toast.error("There is no movie details for this movie.")
+  }
+  
+  const genres = getGenres(movie.genres);
+  
   return (
     <>
       <Link to={backLinkHref.current}>
@@ -55,7 +47,7 @@ export default function MovieDetail() {
             <p><b>Overview:</b>
               <Paragraph>{movie.overview}</Paragraph>
             </p>
-            <p><b>Genres:</b> {genres1}</p>
+            <p><b>Genres:</b> {genres}</p>
           </div>
         </Container>
         <ul>

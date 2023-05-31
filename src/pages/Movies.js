@@ -33,7 +33,6 @@ export default function Movies() {
         toast.error("An error occurred while responding movies from the backend.")
       });
   }, [searchParams]);
- 
 
   return (
     <div>
@@ -43,7 +42,7 @@ export default function Movies() {
           <StyledLink key={movie.id}
             to={`${movie.id}`}
             state={{from: location}}
-            style={{ display: "block" }}>
+          >
             {movie.original_title}
           </StyledLink>
         ))}

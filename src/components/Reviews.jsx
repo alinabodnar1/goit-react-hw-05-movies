@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { getMovieReviews } from '../fetchMovies';
 import { Paragraph, ListLine } from './Components.styled';
-import 'react-toastify/dist/ReactToastify.css';
 
 export default function Reviews() {
   const [reviews, setReviews] = useState([]);

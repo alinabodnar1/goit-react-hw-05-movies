@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Container, Header, StyledLink, List } from './Layout.styled';
 
- const Layout = () => {
+ export default function Layout() {
     return (
         <Container>
             <Header>
@@ -20,4 +20,3 @@ import { Container, Header, StyledLink, List } from './Layout.styled';
         </Container>
     );
 }
-export default Layout;
